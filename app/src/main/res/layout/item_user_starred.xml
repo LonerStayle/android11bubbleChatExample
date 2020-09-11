@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:bind="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <variable
+                name="vm"
+                type="com.soo.github.ui.userdetail.UserRepoAndStarredViewModel" />
+
+        <variable
+                name="userRepo"
+                type="com.soo.github.network.model.UserRepo" />
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/lv_content"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+            <TextView
+                    android:id="@+id/tv_repo_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="0dp"
+                    android:text="@{userRepo.fullName}"
+                    android:textColor="@color/color_black"
+                    android:textSize="20sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:text="repo name" />
+
+            <TextView
+                    android:id="@+id/tv_start_count"
+                    android:layout_width="wrap_content"
+                    android:layout_height="0dp"
+                    android:layout_marginTop="5dp"
+                    android:drawableStart="@drawable/ic_star_border_14px"
+                    android:gravity="top"
+                    android:text="@{userRepo.watchers.toString()}"
+                    android:textSize="14sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_repo_title"
+                    tools:text="0" />
+
+            <TextView
+                    android:id="@+id/tv_fork_count"
+                    android:layout_width="wrap_content"
+                    android:layout_height="0dp"
+                    android:layout_marginStart="5dp"
+                    android:drawableStart="@drawable/ic_merge_type_14px"
+                    android:gravity="top"
+                    android:text="@{userRepo.forksCount.toString()}"
+                    android:textSize="14sp"
+                    app:layout_constraintStart_toEndOf="@+id/tv_start_count"
+                    app:layout_constraintTop_toTopOf="@+id/tv_start_count"
+                    tools:text="0" />
+
+            <TextView
+                    android:id="@+id/tv_time"
+                    android:layout_width="wrap_content"
+                    android:layout_height="0dp"
+                    android:layout_marginStart="5dp"
+                    android:drawableStart="@drawable/ic_schedule_14px"
+                    android:gravity="top"
+                    android:text="@{userRepo.createdAt.substring(0,7)}"
+                    android:textSize="14sp"
+                    app:layout_constraintStart_toEndOf="@+id/tv_fork_count"
+                    app:layout_constraintTop_toTopOf="@+id/tv_fork_count"
+                    tools:text="0" />
+
+            <TextView
+                    android:id="@+id/tv_language"
+                    android:layout_width="wrap_content"
+                    android:layout_height="0dp"
+                    android:layout_marginStart="5dp"
+                    android:gravity="top"
+                    android:text="@{userRepo.language}"
+                    android:textSize="14sp"
+                    android:visibility="@{userRepo.language==null ? View.GONE : View.VISIBLE}"
+                    app:layout_constraintStart_toEndOf="@+id/tv_time"
+                    app:layout_constraintTop_toTopOf="@+id/tv_time"
+                    bind:textColor="@{userRepo.language}"
+                    tools:text="language" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+        <View
+                android:layout_width="0dp"
+                android:layout_height="1dp"
+                android:layout_marginTop="10dp"
+                android:background="@color/color_grey"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/lv_content" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

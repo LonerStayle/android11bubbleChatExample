@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <variable
+                name="userOverView"
+                type="com.soo.github.network.model.UserOverView" />
+
+        <variable
+                name="vm"
+                type="com.soo.github.ui.userdetail.UserOverViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            tools:context=".ui.userdetail.UserOverViewFragment">
+
+        <ImageView
+                android:id="@+id/iv_user_image"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_marginStart="25dp"
+                android:layout_marginTop="25dp"
+                android:adjustViewBounds="true"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:src="@drawable/ic_launcher_foreground" />
+
+        <TextView
+                android:id="@+id/tv_user_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="25dp"
+                android:text="@{userOverView.name}"
+                android:textSize="22sp"
+                app:layout_constraintBottom_toBottomOf="@+id/iv_user_image"
+                app:layout_constraintStart_toEndOf="@+id/iv_user_image"
+                app:layout_constraintTop_toTopOf="@+id/iv_user_image"
+                tools:text="유저 이름" />
+
+        <TextView
+                android:id="@+id/tv_user_login"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="25dp"
+                android:layout_marginTop="5dp"
+                android:text="@{userOverView.login}"
+                android:textColor="@color/color_black"
+                android:textSize="20sp"
+                app:layout_constraintBottom_toBottomOf="@+id/iv_user_image"
+                app:layout_constraintStart_toEndOf="@+id/iv_user_image"
+                app:layout_constraintTop_toBottomOf="@+id/tv_user_name"
+                tools:text="로그인" />
+
+        <TextView
+                android:id="@+id/tv_bio"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:paddingStart="20dp"
+                android:paddingEnd="20dp"
+                android:text="@{userOverView.bio}"
+                android:textSize="18sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/iv_user_image"
+                tools:text="bio" />
+
+        <TextView
+                android:id="@+id/tv_following_num"
+                android:layout_width="0dp"
+                android:layout_height="30dp"
+                android:layout_marginTop="20dp"
+                android:gravity="center"
+                android:text="@{String.format(@string/text_following_count, userOverView.following)}"
+                android:textSize="22sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toStartOf="@+id/tv_followers_num"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tv_bio"
+                tools:text="Following" />
+
+        <TextView
+                android:id="@+id/tv_followers_num"
+                android:layout_width="0dp"
+                android:layout_height="30dp"
+                android:layout_marginTop="22dp"
+                android:gravity="center"
+                android:text="@{String.format(@string/text_follower_count, userOverView.followers)}"
+                android:textSize="22sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="@+id/tv_following_num"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/tv_following_num"
+                app:layout_constraintTop_toBottomOf="@+id/tv_bio"
+                tools:text="Followers" />
+
+        <TextView
+                android:id="@+id/tv_company"
+                android:layout_width="0dp"
+                android:layout_height="40dp"
+                android:layout_marginTop="30dp"
+                android:drawableStart="@drawable/ic_people_24px"
+                android:drawablePadding="20dp"
+                android:paddingStart="20dp"
+                android:paddingTop="5dp"
+                android:paddingEnd="20dp"
+                android:text="@{userOverView.company}"
+                android:textSize="20sp"
+                android:visibility="@{userOverView.company==null ? View.GONE : View.VISIBLE}"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tv_followers_num"
+                tools:text="회사" />
+
+        <TextView
+                android:id="@+id/tv_location"
+                android:layout_width="0dp"
+                android:layout_height="40dp"
+                android:drawableStart="@drawable/ic_room_24px"
+                android:drawablePadding="20dp"
+                android:paddingStart="20dp"
+                android:paddingTop="5dp"
+                android:paddingEnd="20dp"
+                android:text="@{userOverView.location}"
+                android:textSize="20sp"
+                android:visibility="@{userOverView.location==null ? View.GONE : View.VISIBLE}"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tv_company"
+                tools:text="장소" />
+
+        <TextView
+                android:id="@+id/tv_time"
+                android:layout_width="0dp"
+                android:layout_height="40dp"
+                android:drawableStart="@drawable/ic_schedule_24px"
+                android:drawablePadding="20dp"
+                android:paddingStart="20dp"
+                android:paddingTop="5dp"
+                android:paddingEnd="20dp"
+                android:text="@{userOverView.createdAt.substring(0,7)}"
+                android:textSize="20sp"
+                android:visibility="@{userOverView.createdAt==null ? View.GONE : View.VISIBLE}"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tv_location"
+                tools:text="날짜" />
+
+
+        <ProgressBar
+                android:id="@+id/view_loading"
+                style="?android:attr/progressBarStyleLarge"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:visibility="@{vm.loadingState ? View.VISIBLE : View.GONE}"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:visibility="visible" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>
